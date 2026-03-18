@@ -209,27 +209,52 @@ Frontend → Backend API → Rule Engine → Trigger Monitor → External APIs �
 
 # 🛠️ Tech Stack
 
-Frontend:
-- React / Next.js
+## 🎨 Frontend
+- React (Vite)
 - TailwindCSS
-
-Backend:
-- FastAPI / Django
-
-AI:
-- Python, Scikit-learn
-
-Database:
-- PostgreSQL
-
-APIs:
-- OpenWeather
-- AQI API
-
-Payments:
-- UPI / Razorpay
+- Axios (API communication)
 
 ---
+
+## ⚙️ Backend
+- Node.js
+- Express.js
+
+---
+
+## 🗄️ Database
+- PostgreSQL (production-ready)
+- SQLite (used for Phase-1 development and local testing)
+
+---
+
+## 🧠 AI / ML (Planned Integration)
+- Python
+- Scikit-learn
+- FastAPI (for future model serving as a microservice)
+
+---
+
+## 🔗 APIs & Data Sources
+- OpenWeather API (weather-based triggers)
+- AQI API (pollution monitoring)
+- Simulated data layer (used for Phase-1 testing and trigger demonstration)
+
+---
+
+## ⚡ Core Engine
+- Rule-based Parametric Engine (implemented in Express backend)
+  - Trigger condition evaluation
+  - Fixed payout execution
+
+---
+
+## 💸 Payments
+- Simulated payout system (Phase-1 demonstration)
+- Razorpay / UPI (planned production integration)
+
+---
+
 
 # 📊 Development Roadmap
 
