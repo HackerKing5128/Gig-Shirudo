@@ -197,7 +197,9 @@ This prototype demonstrates end-to-end parametric insurance flow with simulated 
 
 # 🧱 System Architecture 
 
+```
 Frontend → Backend API → Rule Engine → Trigger Monitor → External APIs → Fraud Check → Payout System
+```
 
 ### 🔹 Rule Engine (Phase-1)
 - Evaluates trigger conditions  
