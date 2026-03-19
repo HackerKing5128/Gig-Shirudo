@@ -9,7 +9,7 @@
 
 Gig Shirudo is an **AI-powered parametric insurance platform** designed to protect gig economy delivery workers from **income loss caused by external disruptions** such as extreme weather, pollution, and city-wide restrictions.
 
-⚡ **Key Innovation:**  
+⚡ **Key Innovation:**
 This platform focuses specifically on income protection (not health or asset insurance), aligning with parametric insurance principles.
 
 This system eliminates manual claims entirely using **parametric triggers**:
@@ -17,6 +17,22 @@ This system eliminates manual claims entirely using **parametric triggers**:
 > Event happens → Fixed payout → Instant compensation
 
 Unlike traditional insurance, there is **no claim filing, no verification delay**.
+
+---
+
+## 📋 Coverage Scope
+
+**What Gig Shirudo Covers:**
+✅ **Income Loss ONLY** - Compensation for earnings lost due to external disruptions (weather, pollution, curfews, platform outages)
+
+**What is NOT Covered:**
+❌ Health insurance or medical expenses
+❌ Vehicle damage or repair costs
+❌ Accident-related injuries or hospitalization
+❌ Personal asset protection
+
+**Why this scope?**
+Parametric insurance works best for measurable, external events with fixed payouts. Medical claims and vehicle repairs require individual assessment, making them unsuitable for automated parametric triggers. By focusing exclusively on income protection, we maintain the integrity of instant, no-claim payouts.
 
 ---
 
@@ -506,6 +522,48 @@ Frontend → Backend API → Rule Engine → Trigger Monitor → External APIs �
 
 ---
 
+# 📱 Platform Architecture & Justification
+
+## Platform Choice: Progressive Web App (PWA)
+
+We chose **PWA** as the optimal balance between user experience and development feasibility. While native apps offer the smoothest experience, PWA provides 80% of native capability with 40% of development time - critical for rapid prototyping and iteration during this hackathon. Our target users (delivery workers) need installable, offline-capable, notification-enabled apps - all achievable with PWA using our existing React expertise.
+
+### Why PWA Over Native Mobile Apps?
+
+**Native App Challenges:**
+- Dual development (Android + iOS) = 2x time and cost
+- App store approval delays (3-7 days per update)
+- React Native learning curve (team has no prior experience)
+- Not feasible for 6-week hackathon timeline
+
+**Why PWA is Optimal:**
+
+| Feature | Requirement | PWA Capability |
+|---------|------------|----------------|
+| **Phone-like access** | Workers need quick app launch | ✅ Install on home screen |
+| **Offline functionality** | Network drops during weather events | ✅ Service workers cache data |
+| **Push notifications** | Real-time trigger alerts | ✅ Web Push API |
+| **GPS access** | Location verification | ✅ Geolocation API |
+| **Motion sensors** | Anti-spoofing detection | ✅ Accelerometer/Gyroscope APIs |
+| **Cross-platform** | Android + iOS workers | ✅ Single codebase |
+| **Rapid iteration** | Fast updates during hackathon | ✅ No app store delays |
+
+### Implementation Strategy:
+
+**Phase-1 (Week 1-2):** Build standard React web application (current tech stack)
+**Phase-2 (Week 3):** Convert to PWA (add manifest + service worker - ~4 hours)
+**Phase-3+ (Week 4-6):** Enhance PWA features (offline sync, advanced notifications)
+
+**Technical Approach:**
+- Using Vite PWA Plugin for seamless conversion
+- No code rewrite required - pure progressive enhancement
+- Sensor APIs (GPS, accelerometer) accessible via standard Web APIs
+- Push notifications via Firebase Cloud Messaging (FCM)
+
+**Real-World Validation:**
+Leading platforms (Twitter Lite, Starbucks, Flipkart Lite) use PWAs successfully in Indian market - proven approach for our target demographic of gig workers.
+
+---
 
 # 📊 Development Roadmap
 
