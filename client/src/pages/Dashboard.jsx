@@ -30,6 +30,8 @@ export default function Dashboard() {
       if (type === 'rain') amount = 800
       if (type === 'heat') amount = 600
       if (type === 'pollution') amount = 500
+      if (type === 'curfew') amount = 1000
+      if (type === 'outage') amount = 700
 
       setEvent(type)
       setPayout(amount)
@@ -44,7 +46,11 @@ export default function Dashboard() {
         ? 'Temperature > 42C'
         : event === 'pollution'
           ? 'AQI > 350'
-          : ''
+          : event === 'curfew'
+            ? 'Government Curfew Alert'
+            : event === 'outage'
+              ? 'Platform Downtime > 30 mins'
+              : ''
 
   return (
     <div className="relative min-h-screen overflow-hidden bg-[radial-gradient(circle_at_top,#0f3b6f_0%,#08142e_45%,#040814_100%)] text-white">
@@ -108,20 +114,28 @@ export default function Dashboard() {
               <h3 className="mb-2 text-lg font-semibold">Fraud Protection</h3>
               <p className="text-emerald-300">Low Risk Activity</p>
               <p className="mt-1 text-sm text-slate-300">Behavior, device signals and location verified</p>
-              <Button 
-                variant="soft"
-                className="w-full mt-4" 
-                onClick={() => navigate('/verification')}
-              >
-                Apply for Payout Verification
-              </Button>
+
+              {user?.verificationApplied ? (
+                <div className="mt-4 rounded-xl border border-amber-400/30 bg-amber-400/10 p-3">
+                  <p className="text-sm font-semibold text-amber-300">⏳ Verification Pending</p>
+                  <p className="text-xs text-slate-300 mt-1">Your documents are under review (24-48 hours)</p>
+                </div>
+              ) : (
+                <Button
+                  variant="soft"
+                  className="w-full mt-4"
+                  onClick={() => navigate('/verification')}
+                >
+                  Apply for Payout Verification
+                </Button>
+              )}
             </Card>
           </div>
 
           <Card>
             <h3 className="mb-4 text-xl font-bold">Simulate Disruption Event</h3>
             <p className="text-sm text-slate-300 mb-4">Test how instant payouts work by simulating real-world disruption events</p>
-            <div className="grid gap-3 sm:grid-cols-3">
+            <div className="grid gap-3 sm:grid-cols-3 lg:grid-cols-5">
               <Button className="w-full" disabled={loading} onClick={() => simulate('rain')}>
                 🌧️ Rain Event
               </Button>
@@ -130,6 +144,12 @@ export default function Dashboard() {
               </Button>
               <Button className="w-full" disabled={loading} onClick={() => simulate('pollution')}>
                 💨 Pollution Spike
+              </Button>
+              <Button className="w-full" disabled={loading} onClick={() => simulate('curfew')}>
+                🚨 Curfew Alert
+              </Button>
+              <Button className="w-full" disabled={loading} onClick={() => simulate('outage')}>
+                📱 Platform Outage
               </Button>
             </div>
 
