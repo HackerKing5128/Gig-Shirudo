@@ -35,7 +35,7 @@ app.get("/health", async (req, res) => {
 });
 
 // API Routes (to be added)
-// app.use('/api/auth', require('./routes/auth.routes'));
+app.use("/api/auth", require("./routes/auth.routes"));
 // app.use('/api/users', require('./routes/user.routes'));
 // app.use('/api/platforms', require('./routes/platform.routes'));
 // app.use('/api/cities', require('./routes/city.routes'));
