@@ -99,9 +99,8 @@ const register = async (req, res) => {
     });
   } catch (error) {
     await client.query("ROLLBACK");
-    return apiResponse(res, 500, false, "registration failed", {
-      error: error.message,
-    });
+    console.error("Error during user registration:", error);
+    return apiResponse(res, 500, false, "registration failed");
   } finally {
     client.release();
   }
