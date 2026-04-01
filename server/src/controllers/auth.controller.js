@@ -171,9 +171,8 @@ const login = async (req, res) => {
     });
   } catch (error) {
     await client.query("ROLLBACK");
-    return apiResponse(res, 500, false, "login failed", {
-      error: error.message,
-    });
+    console.error("Error during login:", error);
+    return apiResponse(res, 500, false, "login failed");
   } finally {
     client.release();
   }
