@@ -5,18 +5,27 @@ const { hashToken, detectDeviceType } = require("../utils/helpers");
 const getAccessExpiry = () => process.env.JWT_EXPIRES_IN || "7d";
 const getRefreshExpiry = () => process.env.JWT_REFRESH_EXPIRES_IN || "30d";
 
+const getJwtSecret = () => {
+  const secret = process.env.JWT_SECRET;
+  if (!secret) {
+    throw new Error("JWT_SECRET environment variable is not set. Please configure it before creating sessions.");
+  }
+  return secret;
+};
+
 const createSession = async ({ client, userId, req }) => {
   const sessionId = crypto.randomUUID();
+  const secret = getJwtSecret();
 
   const accessToken = jwt.sign(
     { user_id: userId, session_id: sessionId, token_type: "access" },
-    process.env.JWT_SECRET,
+    secret,
     { expiresIn: getAccessExpiry() },
   );
 
   const refreshToken = jwt.sign(
     { user_id: userId, session_id: sessionId, token_type: "refresh" },
-    process.env.JWT_SECRET,
+    secret,
     { expiresIn: getRefreshExpiry() },
   );
 
